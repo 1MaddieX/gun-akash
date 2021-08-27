@@ -1,0 +1,43 @@
+version: "2.0"
+
+services:
+  gun:
+    image: borderlinenetwork/full-gun:0.2020.1234
+    env:
+      - NPM_CONFIG_PRODUCTION=true
+      - PEERS=https://gun-us.herokuapp.com/gun,https://gunjs.herokuapp.com/gun
+    expose:
+      - port: 8765
+        as: 80
+        accept:
+          - your.domain
+        to:
+          - global: true
+
+profiles:
+  compute:
+    gun:
+      resources:
+        cpu:
+          units: 1
+        memory:
+          size: "2Gi"
+        storage:
+          size: "2Gi"
+  placement:
+    westcoast:
+      attributes:
+        datacenter: equinix-metal-sjc1
+      signedBy:
+        anyOf:
+          - "akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63"
+      pricing:
+        gun:
+          denom: uakt
+          amount: 10
+
+deployment:
+  gun:
+    westcoast:
+      profile: gun
+      count: 1
