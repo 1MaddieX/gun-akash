@@ -5,7 +5,7 @@ services:
     image: borderlinenetwork/full-gun:0.2020.1235
     env:
       - NPM_CONFIG_PRODUCTION=true
-      - PEERS=https://gun-us.herokuapp.com/gun,https://gunjs.herokuapp.com/gun
+      - PEERS=https://gun-us.herokuapp.com/gun,https://gunjs.herokuapp.com/gun,https://relay.peer.ooo/gun
     expose:
       - port: 8765
         as: 80
